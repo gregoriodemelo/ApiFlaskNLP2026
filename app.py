@@ -34,9 +34,10 @@ def home():
 def results():
     # Verifica a chave de autorização
     auth_key = request.headers.get("Authorization")
-    print("Authorization recebido:", repr(auth_key))  # <-- loga exatamente o que chegou
+    print("Authorization recebido:", repr(auth_key))   # loga o que chegou
+    print("Chave esperada:", repr(chave_secreta))      # loga o que está no backend
 
-    if not auth_key or auth_key.strip() != chave_secreta.strip():
+    if not auth_key or str(auth_key).strip() != str(chave_secreta).strip():
         return jsonify({"error": "Unauthorized"}), 401
 
     data = request.get_json(force=True)
