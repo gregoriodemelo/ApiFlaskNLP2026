@@ -47,6 +47,7 @@ def results():
     response = melhorarResposta(prompt)
     return jsonify({"mensagem": response})
 
-# Bloco principal para rodar localmente
+# Bloco principal para rodar localmente e no Render
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000, debug=True)
+    port = int(os.environ.get("PORT", 5000))  # usa porta dinâmica do Render
+    app.run(host="0.0.0.0", port=port, debug=True)
